@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Hamburger Menu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        
+        .hamburger {
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+        }
+        
+        .hamburger:hover .line {
+            stroke: #666;
+        }
+        
+        .line {
+            stroke: #333;
+            stroke-width: 4;
+            stroke-linecap: round;
+            transition: stroke 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <svg class="hamburger" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <line class="line" x1="10" y1="15" x2="50" y2="15" />
+        <line class="line" x1="10" y1="30" x2="50" y2="30" />
+        <line class="line" x1="10" y1="45" x2="50" y2="45" />
+    </svg>
+</body>
+</html>
