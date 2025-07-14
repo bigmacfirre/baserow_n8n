@@ -1,0 +1,40 @@
+service: realty-code
+image: <%= ENV['KAMAL_REGISTRY_USERNAME'] %>/realty-n8n
+
+proxy:
+  ssl: true
+  host: code.slavaestates.com
+  forward_headers: true
+  healthcheck:
+    path: /healthz
+
+volumes:
+  - "n8n_data:/home/node/.n8n"
+
+builder:
+  dockerfile: n8n.Dockerfile
+  arch: amd64
+
+aliases:
+  shell: app exec --interactive --reuse "sh"
+  backup_workflows: app exec --reuse "n8n export:workflow --backup --output=/home/node/.n8n/backups/latest/workflows"
+  backup_credentials: app exec --reuse "n8n export:credentials --backup --output=/home/node/.n8n/backups/latest/credentials"
+  backup_clean: app exec --reuse "rm -rf /home/node/.n8n/backups/latest"
+  backup_mkdir: app exec --reuse "mkdir -p /home/node/.n8n/backups/latest"
+  backup_list: app exec --reuse "ls -la /home/node/.n8n/backups/latest/"
+  backup_count: app exec --reuse "find /home/node/.n8n/backups/latest -type f | wc -l"
+  restore_workflows: app exec --reuse "n8n import:workflow --separate --input=/home/node/.n8n/backups/latest/workflows"
+  restore_credentials: app exec --reuse "n8n import:credentials --separate --input=/home/node/.n8n/backups/latest/credentials"
+
+env:
+  clear:
+    N8N_PORT: 80
+    N8N_EDITOR_BASE_URL: "https://code.slavaestates.com"
+    N8N_PROTOCOL: "http"
+    WEBHOOK_URL: "https://code.slavaestates.com"
+    N8N_RUNNERS_ENABLED: true
+    N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE: true
+    N8N_HIRING_BANNER_ENABLED: false
+    N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: true
+    GITHUB_REPO: "realty"
+    GITHUB_USERNAME: "Siam-Capsule"
