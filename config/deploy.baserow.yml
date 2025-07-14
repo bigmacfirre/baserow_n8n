@@ -40,7 +40,7 @@ builder:
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
   clear:
-    BASEROW_PUBLIC_URL: https://data.slavaestates.com
+    BASEROW_PUBLIC_URL: https://data.gobigmac.com
     BASEROW_TRIGGER_SYNC_TEMPLATES_AFTER_MIGRATION: false
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
