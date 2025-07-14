@@ -1,5 +1,5 @@
-service: realty-data
-image: <%= ENV['KAMAL_REGISTRY_USERNAME'] %>/realty-baserow
+service: bigmac-data
+image: <%= ENV['KAMAL_REGISTRY_USERNAME'] %>/bigmac-baserow
 
 # Baserow needs more than the default 30s to boot.
 deploy_timeout: 120
@@ -14,7 +14,7 @@ servers:
 proxy:
   ssl: true
   forward_headers: true
-  host: data.slavaestates.com
+  host: data.gobigmac.com
   healthcheck:
     path: /_health
     interval: 10
@@ -42,13 +42,6 @@ env:
   clear:
     BASEROW_PUBLIC_URL: https://data.slavaestates.com
     BASEROW_TRIGGER_SYNC_TEMPLATES_AFTER_MIGRATION: false
-    DOWNLOAD_FILE_VIA_XHR: 1
-    AWS_S3_CUSTOM_DOMAIN: "hel1.your-objectstorage.com/realty-media"
-  secret:
-    - AWS_ACCESS_KEY_ID:S3_ACCESS_KEY_ID
-    - AWS_SECRET_ACCESS_KEY:S3_SECRET_ACCESS_KEY
-    - AWS_STORAGE_BUCKET_NAME:S3_MEDIA_BUCKET
-    - AWS_S3_ENDPOINT_URL:S3_ENDPOINT
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
